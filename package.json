@@ -6,19 +6,41 @@
   "engines": {
     "vscode": "^1.102.0"
   },
+  
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+  "onView:regexTester",
+  "onCommand:regexTester.enterPattern",
+  "onCommand:regexTester.selectFlags",
+  "onCommand:regexTester.selectPreset"
+],
   "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
+ "contributes": {
+  "commands": [
+    { "command": "regexTester.enterPattern", "title": "Enter Regex Pattern" },
+    { "command": "regexTester.selectFlags", "title": "Select Regex Flags" },
+    { "command": "regexTester.selectPreset", "title": "Select Regex Preset" }
+  ],
+  "viewsContainers": {
+    "activitybar": [
       {
-        "command": "regex-tester.openPanel",
-        "title": "Regex Tester"
+        "id": "regexContainer",
+        "title": "Regex",
+        "icon": "resources/icon.svg"
       }
     ]
   },
+  "views": {
+    "regexContainer": [
+      {
+        "id": "regexTester",
+        "name": "Regex Tester"
+      }
+    ]
+  }
+},
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
