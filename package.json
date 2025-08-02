@@ -3,6 +3,7 @@
   "displayName": "Regex Copilot",
   "description": "Regex playground with AI-powered suggestions and multi-select editing",
   "version": "0.0.1",
+  "publisher": "SaanchitaV",
   "engines": {
     "vscode": "^1.102.0"
   },
@@ -15,8 +16,7 @@
     "url":"https://github.com/SaanchitaV/RegexMatcher/issues"
   },
   "activationEvents": [
-    "onCommand:regex-copilot.open",
-    "onView:regex-copilot-view"
+    "*"
   ],
   "browser": "./out/extension.js",
   "main": "./out/extension.js",
@@ -44,7 +44,8 @@
       "regex-copilot-container": [
         {
           "id": "regex-copilot-view",
-          "name": "Playground"
+          "name": "Playground",
+          "type": "webview"
         }
       ]
     }

@@ -1,18 +1,31 @@
 import * as vscode from 'vscode';
-import { RegexPanelProvider } from './panel';
+
+class SimpleViewProvider implements vscode.WebviewViewProvider {
+    constructor(private readonly extensionUri: vscode.Uri) {}
+
+    resolveWebviewView(webviewView: vscode.WebviewView) {
+        webviewView.webview.options = { enableScripts: true };
+        webviewView.webview.html = `
+            <!DOCTYPE html>
+            <html>
+            <body>
+                <h2>Hello from Regex Copilot</h2>
+                <p>This proves the Activity Bar → Webview works.</p>
+            </body>
+            </html>
+        `;
+        console.log("Webview loaded successfully ✅");
+    }
+}
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('Regex Copilot is active');
 
-    const provider = new RegexPanelProvider(context.extensionUri);
+    const provider = new SimpleViewProvider(context.extensionUri);
 
     context.subscriptions.push(
         vscode.window.registerWebviewViewProvider('regex-copilot-view', provider)
     );
-
-    context.subscriptions.push(
-        vscode.commands.registerCommand('regex-copilot.open', () => {
-            vscode.commands.executeCommand('workbench.view.extension.regex-copilot-container');
-        })
-    );
 }
+
+export function deactivate() {}
