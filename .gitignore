@@ -1,4 +1,12 @@
 node_modules
-out
+npm-debug.log
+yarn-error.log
+out/
+dist/
+*.vsix
+.vscode/
+.history/
+.DS_Store
+Thumbs.db
 .vscode-test
 .vscode/*.code-workspace

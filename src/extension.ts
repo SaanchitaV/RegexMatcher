@@ -1,23 +1,18 @@
 import * as vscode from 'vscode';
-import { RegexViewProvider } from './RegexViewProvider';
+import { RegexPanelProvider } from './panel';
 
-/**
- * Called when the extension is activated.
- * @param context The extension context.
- */
 export function activate(context: vscode.ExtensionContext) {
-  const provider = new RegexViewProvider(context);
-  context.subscriptions.push(
-    // Register the tree data provider for the regex tester view.
-    vscode.window.registerTreeDataProvider('regexTester', provider),
+    console.log('Regex Copilot is active');
 
-    // Register the command to prompt the user for a pattern.
-    vscode.commands.registerCommand('regexTester.enterPattern', () => provider.promptPattern()),
+    const provider = new RegexPanelProvider(context.extensionUri);
 
-    // Register the command to prompt the user for regex flags.
-    vscode.commands.registerCommand('regexTester.selectFlags', () => provider.promptFlags()),
+    context.subscriptions.push(
+        vscode.window.registerWebviewViewProvider('regex-copilot-view', provider)
+    );
 
-    // Register the command to prompt the user for a regex preset.
-    vscode.commands.registerCommand('regexTester.selectPreset', () => provider.selectPreset())
-  );
+    context.subscriptions.push(
+        vscode.commands.registerCommand('regex-copilot.open', () => {
+            vscode.commands.executeCommand('workbench.view.extension.regex-copilot-container');
+        })
+    );
 }

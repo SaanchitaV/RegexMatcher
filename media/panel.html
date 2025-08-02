@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regex Copilot</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h3>Regex Playground</h3>
+
+    <label for="pattern">Regex Pattern:</label>
+    <input id="pattern" type="text" placeholder="Enter regex" />
+
+    <label for="flags">Flags:</label>
+    <input id="flags" type="text" value="g" />
+
+    <label for="sample">Sample Text:</label>
+    <textarea id="sample" placeholder="Paste your text/code here"></textarea>
+
+    <div class="buttons">
+        <button id="select">Select Matches</button>
+        <button id="delete">Delete Matches</button>
+    </div>
+
+    <div id="preview"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

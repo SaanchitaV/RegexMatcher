@@ -1,63 +1,68 @@
 {
-  "name": "regextester-extension",
-  "displayName": "regextester-extension",
-  "description": "Lightweight Regex 101 inbuilt in VSCode",
+  "name": "regex-copilot",
+  "displayName": "Regex Copilot",
+  "description": "Regex playground with AI-powered suggestions and multi-select editing",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.102.0"
   },
-  
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-  "onView:regexTester",
-  "onCommand:regexTester.enterPattern",
-  "onCommand:regexTester.selectFlags",
-  "onCommand:regexTester.selectPreset"
-],
-  "main": "./out/extension.js",
- "contributes": {
-  "commands": [
-    { "command": "regexTester.enterPattern", "title": "Enter Regex Pattern" },
-    { "command": "regexTester.selectFlags", "title": "Select Regex Flags" },
-    { "command": "regexTester.selectPreset", "title": "Select Regex Preset" }
-  ],
-  "viewsContainers": {
-    "activitybar": [
-      {
-        "id": "regexContainer",
-        "title": "Regex",
-        "icon": "resources/icon.svg"
-      }
-    ]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SaanchitaV/RegexMatcher.git"
   },
-  "views": {
-    "regexContainer": [
+  "homepage": "https://github.com/SaanchitaV/RegexMatcher#readme",
+  "bugs": {
+    "url":"https://github.com/SaanchitaV/RegexMatcher/issues"
+  },
+  "activationEvents": [
+    "onCommand:regex-copilot.open",
+    "onView:regex-copilot-view"
+  ],
+  "browser": "./out/extension.js",
+  "main": "./out/extension.js",
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "contributes": {
+    "commands": [
       {
-        "id": "regexTester",
-        "name": "Regex Tester"
+        "command": "regex-copilot.open",
+        "title": "Regex Copilot: Open"
       }
-    ]
-  }
-},
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "regex-copilot-container",
+          "title": "Regex Copilot",
+          "icon": "media/regex-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "regex-copilot-container": [
+        {
+          "id": "regex-copilot-view",
+          "name": "Playground"
+        }
+      ]
+    }
+  },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "package": "vsce package",
+    "publish": "vsce publish",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src",
-    "test": "vscode-test"
+    "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
     "@types/vscode": "^1.102.0",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
-    "@typescript-eslint/eslint-plugin": "^8.31.1",
-    "@typescript-eslint/parser": "^8.31.1",
-    "eslint": "^9.25.1",
-    "typescript": "^5.8.3",
-    "@vscode/test-cli": "^0.0.11",
-    "@vscode/test-electron": "^2.5.2"
+    "typescript": "^5.9.2",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "@types/node": "^24.1.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
   }
 }
